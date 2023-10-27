@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{%block select%} 
+    {% include 'elements/selector.html' %} 
+{%endblock%}
+
+{% block title %}
+    <div class="supprimer">
+        <p>Suppression de Magasin </p>
+        <div class="avertie">
+            <p>Vous êtes sur le point de supprimer le magasin ''. <br> Ëtes vous sûr de vouloir continuer</p>
+        </div>
+        <div class="decision">
+            <a href="/magasin">Retour</a>
+            <button type="submit">Valider</button>
+        </div>
+    </div>         
+{% endblock %}

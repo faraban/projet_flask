@@ -1,0 +1,270 @@
+*{
+    margin: 0;
+}
+
+/*** base ***/
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #dbe2e2;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    position: sticky ;
+    top:0%;
+    background-color: #3472c4;
+    height: 50px;
+    font-weight: 800;
+    justify-content: center;
+}
+
+nav h1{
+    margin-top: 10px;
+    color: #ffffff; 
+    text-transform: uppercase;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+}
+
+.main ul{
+    background-color: #3472c4;
+    height: 100vh;
+    width: 20%;
+    margin-top: 0;
+    padding-top: 20px;
+    padding-left: 0 ;
+    list-style-type: none; 
+}
+
+.main ul li{
+    background-color: #ffffff;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 10px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.content{
+    height: 100vh; 
+    min-width: 80%;
+}
+
+.content .formulaire{
+    color: white;
+    background-color: #3472c4;
+    margin-top: 200px;
+    margin-left: 50%;
+    border-radius: 40px;
+    height: 250px;
+    max-height: 500px;
+    width: 25%;
+    min-width: 200px;
+    padding-top: 40px;
+}
+
+.content .formulaire h1{
+    display: flex;
+    color: black;
+    font-size: 25px;
+    justify-content: center;
+}
+
+.content .formulaire form{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    margin: 5%;
+    margin-top: 15%;
+}
+
+.content .formulaire a{
+    display: flex;
+    color: white;
+    font-size: 15px;
+    justify-content: center;
+    margin: 0;
+}
+
+.content .ajout {
+    font-size: 20px;
+    margin-top: 100px;
+    margin-left: 10%;
+    width: 60%;
+}
+
+.content .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.content .form .btn {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center; 
+    width: 100%;
+}
+
+.content .form a {
+    background-color: red;
+    border-radius: 2px #3472c4;
+    width: 100px;
+    text-align: center; 
+    padding: 10px;
+}
+
+.content .form .btn .btn-ajout{
+    text-align: center; 
+    margin-left: 10px;
+    padding: 0;
+    background-color: green;
+    width: 100px;
+}
+
+.content .form .input {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+}
+
+.content .ajout input{ 
+    border-radius: 5px;
+    width: 60%;
+    height: 30PX;
+    border-color:  #3472c4;
+}
+
+.content .magasin .table {
+    width: 100%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table a {
+    padding: 5px 10px;
+    background-color: #eea30d; 
+    color: #fff;
+    border-radius: 5px;
+}
+
+table button.delete {
+    background-color: #aa1625; 
+    margin-left: 5px;
+}
+
+.magasin{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 40px;
+    height: 90%;
+   
+}
+
+.magasin p {
+    margin-top: 40px;
+    height: 30px;
+    font-weight: bolder;
+    font-size: large;
+    float: inline-start;
+    margin-bottom: 10px;
+}
+.ajouter{
+     float: right;
+     background-color: green;
+     padding: 10px;
+     color: white;
+     margin-bottom: 20px;
+     border-radius: 5px;
+}
+
+.supprimer{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100vh;
+    padding: 10%;
+}
+
+.supprimer .avertie {
+    margin-top: 30px;
+    background-color: #dcb678;
+    margin-left: 10%;
+    width: 80%;
+    font-size: 20px;
+    border-radius: 5px;
+    border: black solid 0.5px;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.supprimer .decision {
+    margin-top: 30px;
+    margin-left: 10%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.supprimer .decision a {
+    margin-right: 20px;
+    font-size: 25px;
+    border: black solid 0.5px;
+    background-color: red;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+}
+
+.supprimer .decision button {
+    font-size: 25px;
+    border: black solid 0.5px;
+    background-color: rgb(61, 222, 61);
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+}
+
+.flash{
+    background-color: rgb(131, 249, 131);
+    padding: 5px;
+    color: white;
+    border-radius: 5px ;
+    margin-top: 10px;
+    margin-left: 20%;
+    width: 300px;
+    text-align: center;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}

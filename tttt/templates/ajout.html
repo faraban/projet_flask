@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{%block select%} 
+    {% include 'elements/selector.html' %} 
+{%endblock%}
+
+{% block title %}
+    <div class="ajout">
+        <p>Ajouter un nouveau Magasin </p>
+        <form  class="form" method="POST">
+                <div class="input">
+                    <label for="nom">Nom :</label>
+                    <input type="text" name="nom" id="nom" value= "{{data[1]}}" required>
+                </div>
+                
+                <div class="input">
+                    <label for="Adresse">Adresse :</label>
+                    <input type="text" name="Adresse" id="Adresse" value="{{data[2]}}" required>
+                </div>
+                
+                <div class="input">
+                    <label for="Téléphone">Téléphone :</label>
+                    <input type="integer" name="Téléphone" id="Téléphone" value="{{data[3]}}" required>
+                </div>
+                
+                <div class="input">
+                    <label for="email">Email :</label>
+                    <input type="email" name="email" id="email" value="{{data[4]}}" required>
+                </div>
+                
+                <div class="btn">
+                    <a href="/magasin">Retour</a>
+                    <button class="btn-ajout" type="submit">Valider</button>
+                </div>
+        </form>
+    </div>         
+{% endblock %}

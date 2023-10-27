@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   <div class="formulaire">
+        <h1>Connectez-vous</h1>
+        <form method="POST">
+            <input type="text" name="nom"  >
+            <br>
+            <input type="email" name="email" >
+            <br>
+            <input type="submit" value="Connexion">
+        </form>
+        <br>
+        <a href="">Si pas de compte inscrivez-vous</a>
+   </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Klinik - Clinic Website Template</title>
+    <link href= "{{url_for('static', filename='css/style&.css')}}" rel="stylesheet">
+    {%block reload%}{%endblock%}
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/">
+            <h1 class="text-primary">ZORO</h1>
+        </a>
+    </nav>
+    <section class="main">
+        {%block select%}{%endblock%}
+        <div class="content">
+            {%block title%}{%endblock%}
+        </div>
+    </section>
+</body>
+</html>
