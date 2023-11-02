@@ -3,14 +3,16 @@
 {% block title %}
    <div class="formulaire">
         <h1>Connectez-vous</h1>
+        {% for message in get_flashed_messages() %}
+            <div class="flash_c">{{message}}</div>
+        {% endfor %}
         <form method="POST">
-            <input type="text" name="nom"  >
+            <input type="email" name="email" placeholder="Email" required>
             <br>
-            <input type="email" name="email" >
+            <input type="Password" name="pwd" placeholder="Mot de passe" required >
             <br>
-            <input type="submit" value="Connexion">
+            <button class='btn' type="submit">Connexion</button>
         </form>
-        <br>
-        <a href="">Si pas de compte inscrivez-vous</a>
+        <p>Si pas de compte<a href="/inscription"> inscrivez-vous</a></p> 
    </div>
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div class="testbox">
+    <h1>Registration</h1>
+    {% for message in get_flashed_messages() %}
+       <div class="flash_c">{{message}}</div>
+    {% endfor %}
+    <form  class="form" method="POST">
+        <input type="text" name="nom" id="nom" placeholder="nom" required>
+       
+        <input type="email" name="email" id="email" placeholder="Email" required>
+      
+        <input type="password" name="Password1" id="Password1" placeholder="Password" required>
+        
+        <input type="password" name="Password2" id="Password2" placeholder="Password"  required>
+      
+        <div class="btn"><button type="submit">inscription</button></div>
+    </form>
+    <a href="/">se connecter</a>
+</div>
+{% endblock %}

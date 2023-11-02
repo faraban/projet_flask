@@ -1,44 +1,66 @@
 
-from flask import Flask,url_for,render_template,request,flash,redirect
+from flask import Flask,url_for,render_template,request,flash,redirect,abort 
+from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin, current_user
-from flask_bootstrap import Bootstrap
 import sqlite3
-
+ 
 app = Flask(__name__)
 app.config['SECRET_KEY']='clés_flash'
-login_manager = LoginManager(app)
-login_manager.login_view = 'connexion'
 
 def connect_db():
     return sqlite3.connect('base_de_donnees.db')
 
-class Utilisateur(UserMixin):
-    def __init__(self, id, nom):
-        self.id = id
-        self.nom = nom
-
-    # Vous devrez implémenter des méthodes pour récupérer l'utilisateur par ID et éventuellement pour vérifier les mots de passe.
-
-
 @app.route('/',methods=['GET', 'POST'])
 def connexion():
     if request.method == 'POST':
-          # Vérifiez les informations d'authentification ici (par exemple, vérifiez le nom d'utilisateur et le mot de passe)
-        # Si l'authentification réussit, créez un objet Utilisateur et connectez l'utilisateur
-        utilisateur = Utilisateur(id=1, nom='utilisateur_test')
-        login_user(utilisateur)
-        flash('Connexion réussie', 'success')
-        nom = request.form['nom']
         email = request.form['email']
-        return redirect(url_for('magasin'))
+        pwd = request.form['pwd']
+        
+        con = connect_db()
+        cur = con.cursor()
+        cur.execute(f''' SELECT * FROM users WHERE email ='{email}'
+                       ''')
+        data = cur.fetchall()
+        con.close()
+        if data: 
+            data=data[0]
+            if check_password_hash(data[3],pwd):
+                flash("email succès !", 'info')
+                return redirect(url_for('magasin'))
+            else:
+                flash("password incorrect!", 'info')
+        else:
+            flash("vous n'avez pas de compte !", 'info')
     return render_template('connexion.html')
 
-@app.route('/deconnexion')
-@login_required
-def deconnexion():
-    logout_user()
-    flash('Déconnexion réussie', 'info')
-    return redirect(url_for('connexion'))
+@app.route('/inscription',methods=['GET','POST'])
+def inscription():
+    if request.method == 'POST':
+        Nom = request.form['nom']
+        Mail = request.form['email']
+        pwd1= request.form['Password1']
+        pwd2 = request.form["Password2"]
+        
+        if len(Nom)<=2:
+            flash('Entrez votre Nom','info')
+        elif len(Mail)<=12:
+            flash('Entrez un mail correct','')
+        elif pwd1!=pwd2:
+            flash('Entrez le même pass','')
+        elif len(pwd2) <8 :
+              flash('Entrez un pass d\'aumoins 8 caractere','')
+        else:
+            con = connect_db()
+            cur = con.cursor()
+            cur.execute('''
+                        INSERT INTO users (name, email, password)
+                        VALUES ( ?, ?, ?)
+                        ''', (Nom, Mail,generate_password_hash(pwd1)))
+            con.commit()
+            con.close()
+            flash('Vous êtes enregistrer avec succès, connectez-vous','succès')
+            return redirect(url_for('connexion'))
+    return render_template('inscription.html')
 
 @app.route('/ajout', methods=['GET', 'POST'])
 @login_required
@@ -61,7 +83,6 @@ def ajout():
     data=''
     return render_template('ajout.html',data=data)
 
-
 @app.route('/magasin', methods=['GET', 'POST'])
 @login_required
 def magasin():
@@ -71,7 +92,6 @@ def magasin():
     data = cur.fetchall()
     con.close()
     return render_template('magasin.html', data=data)
-
 
 @app.route('/modifier/<int:item_id>', methods=['GET', 'POST'])
 @login_required
