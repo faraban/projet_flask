@@ -1,7 +1,7 @@
 
 from flask import Flask,url_for,render_template,request,flash,redirect,abort 
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin, current_user
+from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin, current_user 
 import sqlite3
  
 app = Flask(__name__)
