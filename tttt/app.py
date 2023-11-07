@@ -18,7 +18,7 @@ Login_Manager.init_app(app)
 
 @Login_Manager.user_loader
 def load_user(id):
-    return Users.query.get(int(id))
+    return User.query.get(int(id))
 
 @app.route('/',methods=['GET', 'POST'])
 def connexion():
@@ -98,7 +98,6 @@ def ajout():
     return render_template('ajout.html',data=data)
 
 @app.route('/magasin', methods=['GET', 'POST'])
-@login_required
 def magasin():
     con = connect_db()
     cur = con.cursor()
