@@ -3,21 +3,28 @@ from flask import Flask,url_for,render_template,request,flash,redirect,abort
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin, current_user 
 import sqlite3
- 
+
 app = Flask(__name__)
 app.config['SECRET_KEY']='clés_flash'
 
 def connect_db():
     return sqlite3.connect('base_de_donnees.db')
+con = connect_db()
+cur = con.cursor()
+
+Login_Manager=LoginManager()
+Login_Manager.login_view='connexion'
+Login_Manager.init_app(app)
+
+@Login_Manager.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
 
 @app.route('/',methods=['GET', 'POST'])
 def connexion():
     if request.method == 'POST':
         email = request.form['email']
         pwd = request.form['pwd']
-        
-        con = connect_db()
-        cur = con.cursor()
         cur.execute(f''' SELECT * FROM users WHERE email ='{email}'
                        ''')
         data = cur.fetchall()
@@ -26,12 +33,19 @@ def connexion():
             data=data[0]
             if check_password_hash(data[3],pwd):
                 flash("email succès !", 'info')
+                login_user(email,remember=True)
                 return redirect(url_for('magasin'))
             else:
                 flash("password incorrect!", 'info')
         else:
             flash("vous n'avez pas de compte !", 'info')
     return render_template('connexion.html')
+
+@app.route('/deconnection',methods=['GET','POST'])
+@login_required
+def deconnection():
+    logout_user()
+    return redirect(url_for('connexion'))
 
 @app.route('/inscription',methods=['GET','POST'])
 def inscription():

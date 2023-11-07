@@ -23,8 +23,9 @@ nav {
 }
 
 nav h1{
-    margin-top: 10px;
+    margin-top: 2px;
     color: #ffffff; 
+    font-size: 40px;
     text-transform: uppercase;
 }
 
@@ -59,31 +60,32 @@ nav h1{
 .content{
     height: 100vh; 
     min-width: 80%;
+    margin-top: 0;
 }
   
-.content .formulaire{
+.formulaire{
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-color: #3472c4;
     margin-top: 150px;
-    margin-left: 45%;
+    margin-left: 40%;
     border-radius: 30px;
     height: 260px;
     max-height: 500px;
-    width: 25%;
+    width: 20%;
     min-width: 300px;
     padding-top: 10px;
 }
 
-.content .formulaire h1{
+.formulaire h1{
     display: flex;
     justify-content: center;
     color: black;
     font-size: 30px;
 }
 
-.content .formulaire form{
+.formulaire form{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -91,20 +93,20 @@ nav h1{
     margin-top: 10px;
 }
 
-.content .formulaire form input{
+.formulaire form input{
    text-align: center;
    font-size: 20px;
    border-radius: 5px;
 }
 
-.content .formulaire button{
+.formulaire button{
     width: 150px;
     font-size: 20px;
     margin-left: 25%;
     background-color: #16be30;
  }
 
-.content  .flash_c{
+.flash_c{
     display: flex;
     justify-content: center;
     width: 80%;
@@ -116,7 +118,7 @@ nav h1{
     text-align: center;
 }
 
-.content .formulaire p{
+.formulaire p{
     display: flex;
     color: white;
     font-size: 20px;
@@ -124,17 +126,18 @@ nav h1{
     margin: 0;
 }
 
-.content .testbox{
+.testbox{
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-color: #3472c4;
     margin-top: 100px;
-    margin-left: 45%;
+    margin-left: 35%;
+    margin-right: 35%;
     border-radius: 30px;
     height: 350px;
     max-height: 500px;
-    width: 25%;
+    width: 30%;
     min-width: 300px;
 }
 
@@ -144,14 +147,17 @@ nav h1{
     text-align: center;
   }
 
-.content .testbox form input{
+.testbox form input{
     text-align: center;
     font-size: 20px;
+    width: 80%;
     border-radius: 5px;
-    margin: 5px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
  }
 
-.content .testbox button{
+.testbox button{
     width: 150px;
     margin-top: 10px;
     font-size: 20px;
@@ -159,7 +165,7 @@ nav h1{
     background-color: #16be30;
  }
 
-.content .testbox a{
+.testbox a{
     margin-top: 10px;
     font-size: 20px;
     text-align: center;
@@ -227,6 +233,16 @@ table {
     width: 100%;
 }
 
+th, td {
+    padding: 6px;
+    background-color: #9dc3f5;
+    border: 1px solid black;
+    text-align: center;
+}
+th{
+    background-color: #3472c4;
+}
+
 table a {
     padding: 5px 10px;
     background-color: #eea30d; 
@@ -234,9 +250,9 @@ table a {
     border-radius: 5px;
 }
 
-table button .delete {
-    background-color: #aa1625; 
-    margin-left: 5px;
+table .delete {
+    background-color: red; 
+    margin-left: 10px;
 }
 
 .magasin{
@@ -267,29 +283,35 @@ table button .delete {
 .supprimer{
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 100%;
     height: 100vh;
-    padding: 10%;
+    padding-top: 100px;
+}
+
+.supprimer .p{
+    margin-left: 30%;
+    height: 30px;
+    font-weight: bolder;
+    font-size: large;
+    float: inline-start;
 }
 
 .supprimer .avertie {
-    margin-top: 30px;
     background-color: #dcb678;
-    margin-left: 10%;
-    width: 80%;
-    font-size: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+    font-size: 25px;
     border-radius: 5px;
     border: black solid 0.5px;
     text-align: center;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .supprimer .decision {
-    margin-top: 30px;
-    margin-left: 10%;
-    width: 80%;
-    font-size: 20px;
+    padding-top: 20px;
+    font-size: 30px;
     text-align: center;
 }
 
@@ -307,6 +329,7 @@ table button .delete {
 }
 
 .supprimer .decision button {
+    cursor: pointer;
     font-size: 25px;
     border: black solid 0.5px;
     background-color: rgb(61, 222, 61);
@@ -322,19 +345,8 @@ table button .delete {
     background-color: rgb(131, 249, 131);
     padding: 5px;
     color: white;
-    border-radius: 5px ;
-    margin-top: 10px;
-    margin-left: 20%;
-    width: 300px;
+    font-size: 20px;
+    width: 100%;
     text-align: center;
 }
 
-
-table, th, td {
-    border: 1px solid black;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-}

@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {%block reload%} 
-<script>
-    setTimeout(function() {
-        location.reload();
-    }, 8000);  
-</script>
+    {% for message in get_flashed_messages() %}
+        <script>
+            setTimeout(function() {
+                location.reload();
+            }, 8000);  
+        </script>
+    {% endfor %}
 {%endblock%}
 
 {%block select%} 
@@ -13,36 +15,39 @@
 {%endblock%}
 
 {% block title %}
+
+<div class="content">
 {% for message in get_flashed_messages() %}
    <div class="flash">{{message}}</div>
 {% endfor %}
-<div class="magasin">
-    <a class="ajouter" href="/ajout">Ajouter</a>
-    <p>liste des magasins</p>
-    <div class="table">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Téléphones</th>
-                <th>Mail</th>
-                <th>Action</th>
-            </tr>
-            {% for row in data %}
+    <div class="magasin">
+        <a class="ajouter" href="/ajout">Ajouter</a>
+        <p>liste des magasins</p>
+        <div class="table">
+            <table>
                 <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td>
-                        <a class="edit" href="{{ url_for('modifier', item_id=row[0] ) }}">Modifier</a>
-                        <a class="delete" href="{{ url_for('supprimer', item_id=row[0] ) }}">Supprimer</a>
-                    </td>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Adresse</th>
+                    <th>Téléphones</th>
+                    <th>Mail</th>
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>
+                            <a class="edit" href="{{ url_for('modifier', item_id=row[0] ) }}">Modifier</a>
+                            <a class="delete" href="{{ url_for('supprimer', item_id=row[0] ) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}
