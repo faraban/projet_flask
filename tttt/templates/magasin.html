@@ -21,17 +21,18 @@
    <div class="flash">{{message}}</div>
 {% endfor %}
     <div class="magasin">
-        <a class="ajouter" href="/ajout">Ajouter</a>
-        <p>liste des magasins</p>
+        {%if inscrip %}{% endif %}
+        <a class="ajouter" href=f"{{ url_for('ajout', type='{produit}') }}">Ajouter</a>
+        <p>{{titre}}</p>
         <div class="table">
             <table>
                 <tr>
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Adresse</th>
-                    <th>Téléphones</th>
-                    <th>Mail</th>
-                    <th>Action</th>
+                    <th>{{entete[0]}}</th>
+                    <th>{{entete[1]}}</th>
+                    <th>{{entete[2]}}</th>
+                    <th>{{entete[3]}}</th>
+                    <th>{{entete[4]}}</th>
+                    {%if data[5] %}<th>{{entete[5]}}</th>{% endif %}
                 </tr>
                 {% for row in data %}
                     <tr>
@@ -39,7 +40,7 @@
                         <td>{{ row[1] }}</td>
                         <td>{{ row[2] }}</td>
                         <td>{{ row[3] }}</td>
-                        <td>{{ row[4] }}</td>
+                        {%if data[5] %}<td>{{ row[4] }}</td>{% endif %}
                         <td>
                             <a class="edit" href="{{ url_for('modifier', item_id=row[0] ) }}">Modifier</a>
                             <a class="delete" href="{{ url_for('supprimer', item_id=row[0] ) }}">Supprimer</a>

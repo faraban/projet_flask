@@ -48,3 +48,23 @@
 # );''')
 
 # con.close()
+
+
+
+
+# from flask_session import Session
+
+# SESSION_TYPE= 'filesystem'
+# app.config.from_object(__name__)
+# Session(app)
+
+# @app.route('/set/<string:value>')
+# def set_session(value):
+#     session['key']=value
+
+# @app.route('/get')
+# def get_session():
+#     store_session=session.get('key','Aucun utilisateur connecter')
+#     store_session
+from flask import Flask,url_for,render_template,request,flash,redirect,abort,session
+print(session['user'])

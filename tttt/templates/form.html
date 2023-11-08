@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div class="testbox">
+    <h1>{{reg}}{{inscrip}}</h1>
+    {% for message in get_flashed_messages() %}
+       <div class="flash_c">{{message}}</div>
+    {% endfor %}
+    <form  class="form" method="POST">
+        {%if inscrip %}<input type="text" name="nom" id="nom" placeholder="nom" required>{% endif %}
+        <br>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <br>
+        <input type="password" name="Password1" id="Password1" placeholder="Password" required>
+        <br>
+        {%if inscrip %}<input type="password" name="Password2" id="Password2" placeholder="Password"  required>{% endif %}
+        <br>
+        <div class="btn">
+            {%if inscrip %}<button type="submit">inscription</button>{% endif %}
+            {%if reg %}<button class='btn' type="submit">Connexion</button>{% endif %}
+        </div>
+    </form>
+    {%if inscrip %}<a href="/">se connecter</a>{% endif %}
+    {%if reg %}<p>Si pas de compte<a href="/inscription"> inscrivez-vous</a></p>{% endif %}
+</div>
+{% endblock %}
