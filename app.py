@@ -178,7 +178,7 @@ def modifier(item_id,type):
                 cur.execute(f'''
                         UPDATE produit
                         SET (IdProduit,NomProduit, CatProduit, PrixUnitaire)={(IdProduit,NomProduit, CatProduit, PrixUnitaire)}
-                        WHERE id = {item_id}
+                        WHERE IdProduit = {item_id}
                         ''',)
                 con.commit()
                 con.close()
