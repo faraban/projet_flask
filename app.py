@@ -182,8 +182,8 @@ def modifier(item_id,type):
                         ''',)
                 con.commit()
                 con.close()
-                flash(f" Le Magasin numero {item_id} a été modifieé avec succès !", 'info')
-                return redirect(url_for('magasin'))
+                flash(f" Le Produit numero {item_id} a été modifieé avec succès !", 'info')
+                return redirect(url_for('produit'))
             return render_template('ajout.html', data=data,entete=entete,interieur=interieur,titre=titre,produit=produit)
         else:
             item_id=int(item_id)
@@ -225,7 +225,7 @@ def supprimer(item_id,type):
                cur = con.cursor()
                cur.execute(f"DELETE FROM produit WHERE IdProduit ={item_id};")
                con.commit()
-               flash(f" Le Magasin numero {item_id} a été supprimer avec succès !", 'info')
+               flash(f" Le Produit numero {item_id} a été supprimer avec succès !", 'info')
                return redirect(url_for('produit'))
             return render_template('supprimer.html',produit=produit)
         else:
