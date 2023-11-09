@@ -7,30 +7,30 @@
 {% block title %}
 <div class="content">
     <div class="ajout">
-        <p>Ajouter un nouveau Magasin </p>
+        <p>{{titre}} </p>
         <form  class="form" method="POST">
                 <div class="input">
-                    <label for="nom">Nom :</label>
-                    <input type="text" name="nom" id="nom" value= "{{data[1]}}" placeholder="nom" required>
+                    <label for="nom">{{entete[0]}}</label>
+                    <input {%if produit %}type="integer" value= "{{data[0]}}"{%else%}type="text" value= "{{data[1]}}"{% endif %} name="nom" id="nom"  placeholder="{{interieur[0]}}" required>
                 </div>
                 
                 <div class="input">
-                    <label for="Adresse">Adresse :</label>
-                    <input type="text" name="Adresse" id="Adresse" value="{{data[2]}}" placeholder="Adresse" required>
+                    <label for="Adresse">{{entete[1]}}</label>
+                    <input type="text" {%if produit %}value= "{{data[1]}}"{%else%}value="{{data[2]}}"{% endif %} name="Adresse" id="Adresse"  placeholder="{{interieur[1]}}" required>
                 </div>
                 
                 <div class="input">
-                    <label for="Téléphone">Téléphone :</label>
-                    <input type="integer" name="Téléphone" id="Téléphone" value="{{data[3]}}" placeholder="Téléphone" required>
+                    <label for="Téléphone">{{entete[2]}}</label>
+                    <input {%if produit %}type="text" value="{{data[2]}}"{%else %}type="integer" value="{{data[3]}}"{% endif %} name="Téléphone" id="Téléphone"  placeholder="{{interieur[2]}}" required>
                 </div>
                 
                 <div class="input">
-                    <label for="email">Email :</label>
-                    <input type="email" name="email" id="email" value="{{data[4]}}" placeholder="email" required>
+                    <label for="email">{{entete[3]}}</label>
+                    <input {%if produit%}type="integer" value="{{data[3]}}"{%else%}type="email" value="{{data[4]}}"{% endif %} name="email" id="email" placeholder="{{interieur[3]}}" required>
                 </div>
                 
                 <div class="btn">
-                    <a href="/magasin">Retour</a>
+                    <a href="/{{produit}}{{magasin}}">Retour</a>
                     <button class="btn-ajout" type="submit">Valider</button>
                 </div>
         </form>

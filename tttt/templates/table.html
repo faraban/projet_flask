@@ -21,8 +21,7 @@
    <div class="flash">{{message}}</div>
 {% endfor %}
     <div class="magasin">
-        {%if inscrip %}{% endif %}
-        <a class="ajouter" href=f"{{ url_for('ajout', type='{produit}') }}">Ajouter</a>
+        <a class="ajouter" href="{{ url_for('ajout', type=cat) }}">Ajouter</a>
         <p>{{titre}}</p>
         <div class="table">
             <table>
@@ -42,8 +41,8 @@
                         <td>{{ row[3] }}</td>
                         {%if data[5] %}<td>{{ row[4] }}</td>{% endif %}
                         <td>
-                            <a class="edit" href="{{ url_for('modifier', item_id=row[0] ) }}">Modifier</a>
-                            <a class="delete" href="{{ url_for('supprimer', item_id=row[0] ) }}">Supprimer</a>
+                            <a class="edit" href="{{ url_for('modifier', item_id=row[0],type=cat ) }}">Modifier</a>
+                            <a class="delete" href="{{ url_for('supprimer', item_id=row[0],type=cat ) }}">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}

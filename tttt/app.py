@@ -78,22 +78,31 @@ def inscription():
 @app.route('/ajout/<string:type>', methods=['GET', 'POST'])
 def ajout(type):
     if session['user']:
-        if request.method == 'POST':
-            if type=='produit':
-                Nom = request.form['nom']
-                Adresse = request.form['Adresse']
-                Téléphone = request.form["Téléphone"]
-                Mail = request.form['email']
+        if type=='produit':
+            if request.method == 'POST':
+                IdProduit=request.form['nom']
+                NomProduit = request.form['Adresse']
+                CatProduit = request.form["Téléphone"]
+                PrixUnitaire = request.form["email"]
+                
                 con = connect_db()
                 cur = con.cursor()
                 cur.execute('''
-                    INSERT INTO magasin (Nom, Adresse, Téléphone, Mail)
-                    VALUES ( ?, ?, ?, ?)
-                ''', (Nom, Adresse, Téléphone, Mail))
+                    INSERT INTO Produit (IdProduit,NomProduit, CatProduit, PrixUnitaire)
+                    VALUES ( ?, ?,?, ?)
+                ''', (IdProduit,NomProduit, CatProduit, PrixUnitaire))
                 con.commit()
                 con.close()
-                flash("Votre magasin a été enregistré avec succès !", 'info')
-            else:
+                flash("Votre produit a été ajouté avec succès !", 'info')
+                return redirect(url_for('produit'))
+            produit='produit'
+            titre='Ajouter un nouveau Produit'
+            entete=['IdProduit :','NomProduit :','CatProduit :','PrixUnitaire :']
+            interieur=['IdProduit','NomProduit','CatProduit','PrixUnitaire']
+            data=''
+            return render_template('ajout.html',data=data,entete=entete,interieur=interieur,titre=titre,produit=produit)
+        else:
+            if request.method == 'POST':
                 Nom = request.form['nom']
                 Adresse = request.form['Adresse']
                 Téléphone = request.form["Téléphone"]
@@ -108,14 +117,19 @@ def ajout(type):
                 con.close()
                 flash("Votre magasin a été enregistré avec succès !", 'info')
                 return redirect(url_for('magasin'))
-        data=''
-        return render_template('ajout.html',data=data)
+            magasin='magasin'
+            titre='Ajouter un nouveau Magasin'
+            entete=['Nom :','Adresse :','Téléphone :','Email :']
+            interieur=['Nom','Adresse','Téléphone','Email']
+            data=''
+            return render_template('ajout.html',data=data,entete=entete,interieur=interieur,titre=titre,magasin=magasin)
     else:
         return redirect(url_for('connexion'))
 
 @app.route('/magasin', methods=['GET', 'POST'])
 def magasin():
     if session['user']:
+        cat='magasin'
         entete=['Id','Nom','Adresse','Téléphones','Mail','Action']
         titre='liste des magasins'
         con = connect_db()
@@ -123,7 +137,7 @@ def magasin():
         cur.execute("SELECT * FROM magasin")
         data = cur.fetchall()
         con.close()
-        return render_template('magasin.html', data=data,entete=entete,titre=titre)
+        return render_template('table.html', data=data,entete=entete,titre=titre,cat=cat)
     else:
         return redirect(url_for('connexion'))
 
@@ -138,49 +152,93 @@ def produit():
         cur.execute("SELECT * FROM Produit")
         data = cur.fetchall()
         con.close()
-        return render_template('magasin.html', data=data,entete=entete,titre=titre,cat=cat)
+        return render_template('table.html', data=data,entete=entete,titre=titre,cat=cat)
     else:
         return redirect(url_for('connexion'))
 
-@app.route('/modifier/<int:item_id>', methods=['GET', 'POST'])
-def modifier(item_id):
+@app.route('/modifier/<int:item_id>/<string:type>', methods=['GET', 'POST'])
+def modifier(item_id,type):
     if session['user']:
-        item_id=int(item_id)
-        con = connect_db()
-        cur = con.cursor()    
-        cur.execute("SELECT * FROM magasin WHERE id = ?", (item_id,))
-        data = cur.fetchall()
-        data=data[0]
-        if request.method == 'POST':
-            Nom = request.form['nom']
-            Adresse = request.form['Adresse']
-            Téléphone = request.form["Téléphone"]
-            Mail = request.form['email']
-            cur.execute(f'''
+        if type=='produit':
+            item_id=int(item_id)
+            produit='produit'
+            con = connect_db()
+            cur = con.cursor()    
+            cur.execute("SELECT * FROM produit WHERE IdProduit = ?", (item_id,))
+            data = cur.fetchall()
+            data=data[0]
+            titre='Ajouter un nouveau Produit'
+            entete=['IdProduit :','NomProduit :','CatProduit :','PrixUnitaire :']
+            interieur=['IdProduit','NomProduit','CatProduit','PrixUnitaire']
+            if request.method == 'POST':
+                IdProduit=request.form['nom']
+                NomProduit = request.form['Adresse']
+                CatProduit = request.form["Téléphone"]
+                PrixUnitaire = request.form["email"]
+                cur.execute(f'''
+                        UPDATE produit
+                        SET (IdProduit,NomProduit, CatProduit, PrixUnitaire)={(IdProduit,NomProduit, CatProduit, PrixUnitaire)}
+                        WHERE id = {item_id}
+                        ''',)
+                con.commit()
+                con.close()
+                flash(f" Le Magasin numero {item_id} a été modifieé avec succès !", 'info')
+                return redirect(url_for('magasin'))
+            return render_template('ajout.html', data=data,entete=entete,interieur=interieur,titre=titre,produit=produit)
+        else:
+            item_id=int(item_id)
+            magasin='magasin'
+            con = connect_db()
+            cur = con.cursor()    
+            cur.execute("SELECT * FROM magasin WHERE id = ?", (item_id,))
+            data = cur.fetchall()
+            data=data[0]
+            titre='Ajouter un nouveau Magasin'
+            entete=['Nom :','Adresse :','Téléphone :','Email :']
+            interieur=['Nom','Adresse','Téléphone','Email']
+            if request.method == 'POST':
+                Nom = request.form['nom']
+                Adresse = request.form['Adresse']
+                Téléphone = request.form["Téléphone"]
+                Mail = request.form['email']
+                cur.execute(f'''
                         UPDATE magasin
                         SET (Nom, Adresse, Téléphone, Mail)={(Nom, Adresse, Téléphone, Mail)}
                         WHERE id = {item_id}
-                        ''',)
-            con.commit()
-            con.close()
-            flash(f" Le Magasin numero {item_id} a été modifieé avec succès !", 'info')
-            return redirect(url_for('magasin'))
-        return render_template('ajout.html', data=data)
+                         ''',)
+                con.commit()
+                con.close()
+                flash(f" Le Magasin numero {item_id} a été modifieé avec succès !", 'info')
+                return redirect(url_for('magasin'))
+            return render_template('ajout.html', data=data,entete=entete,interieur=interieur,titre=titre,magasin=magasin)
     else:
         return redirect(url_for('connexion'))
 
-@app.route('/supprimer/<int:item_id>', methods=['GET', 'POST'])
-def supprimer(item_id):
+@app.route('/supprimer/<int:item_id>/<string:type>', methods=['GET', 'POST'])
+def supprimer(item_id,type):
     if session['user']:
-        if request.method == 'POST':
-            item_id=int(item_id)
-            con = connect_db()
-            cur = con.cursor()
-            cur.execute(f"DELETE FROM magasin WHERE id ={item_id};")
-            con.commit()
-            flash(f" Le Magasin numero {item_id} a été supprimer avec succès !", 'info')
-            return redirect(url_for('magasin'))
-        return render_template('supprimer.html')
+        if type=='produit':
+            produit='produit'
+            if request.method == 'POST':
+               item_id=int(item_id)
+               con = connect_db()
+               cur = con.cursor()
+               cur.execute(f"DELETE FROM produit WHERE IdProduit ={item_id};")
+               con.commit()
+               flash(f" Le Magasin numero {item_id} a été supprimer avec succès !", 'info')
+               return redirect(url_for('produit'))
+            return render_template('supprimer.html',produit=produit)
+        else:
+            magasin='magasin'
+            if request.method == 'POST':
+               item_id=int(item_id)
+               con = connect_db()
+               cur = con.cursor()
+               cur.execute(f"DELETE FROM magasin WHERE id ={item_id};")
+               con.commit()
+               flash(f" Le Magasin numero {item_id} a été supprimer avec succès !", 'info')
+               return redirect(url_for('magasin'))
+            return render_template('supprimer.html',magasin=magasin)
     else:
         return redirect(url_for('connexion'))
 
